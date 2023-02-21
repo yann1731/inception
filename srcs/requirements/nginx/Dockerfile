@@ -1,11 +1,11 @@
-FROM Alpine:3.17
+FROM Alpine:3.16
 
-RUN apk update && apk upgrade
+RUN apk update && apk add nginx openssl
 
-RUN apk add nginx openssh
+COPY config/nginx.conf /etc/nginx/nginx.conf
 
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+COPY entrypoint.sh /entrypoint.sh
 
 EXPOSE 443
 
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["/entrypoint.sh"]
