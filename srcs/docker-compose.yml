@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   mariadb:
-    build:
+    build: ./requirements/mariadb/
     container_name: mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=root_pass
@@ -10,21 +10,31 @@ services:
       -volumeName:containerPath:ro
     ports:
       - 3306:3306
-    restart: unless-stopped
+    restart: always
+    networks:
+      - cont_net
 
   nginx:
-    image:
+    build: ./requirements/nginx
     container_name: nginx
     volumes:
       -volumeName
     ports:
       - 443:443
-    restart: unless-stopped
+    restart: always
+    networks:
+      - cont_net
 
   wordpress:
-    image:
+    build: ./requirements/wordpress
     container_name: wordpress
     volumes:
      - vol
     ports:
       - 9000:9000
+    restart: always
+    networks:
+      - cont_net
+
+  networks:
+    
