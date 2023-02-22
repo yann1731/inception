@@ -2,9 +2,9 @@ FROM alpine:3.16
 
 RUN apk update && apk upgrade
 
-RUN apk add mariadb-server
+RUN apk add mariadb-server pwgen
 
-COPY config/my.cnf /etc/mysql/my.cnf
+COPY config/50-server.cnf /etc/mysql/mariadb.d/my.cnf
 
 COPY etc /etc
 COPY usr /usr
