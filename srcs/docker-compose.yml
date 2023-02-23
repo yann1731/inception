@@ -12,7 +12,7 @@ services:
       - 3306:3306
     restart: always
     networks:
-      - cont_net
+      - inception_net
 
   nginx:
     build: ./requirements/nginx
@@ -23,7 +23,7 @@ services:
       - 443:443
     restart: always
     networks:
-      - cont_net
+      - inception_net
 
   wordpress:
     build: ./requirements/wordpress
@@ -34,7 +34,7 @@ services:
       - 9000:9000
     restart: always
     networks:
-      - cont_net
+      - inception_net
 
   networks:
-    
+      inception_net: {}
