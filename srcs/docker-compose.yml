@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.3"
 
 services:
   mariadb:
@@ -7,34 +7,56 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root_pass
     volumes:
-      -volumeName:containerPath:ro
+      - volume-mariadb:/var/lib/mysql
     ports:
       - 3306:3306
     restart: always
     networks:
-      - inception_net
+      - inception
+    env_file:
+      - .env
 
   nginx:
     build: ./requirements/nginx
     container_name: nginx
     volumes:
-      -volumeName
+      - volume-wordpress:/usr/share/nginx/html
     ports:
       - 443:443
     restart: always
     networks:
-      - inception_net
+      - inception
+    env_file:
+      - .env
 
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
     volumes:
-     - vol
+      - volume-wordpress:/usr/share/nginx/html
     ports:
       - 9000:9000
     restart: always
     networks:
-      - inception_net
+      - inception
+    env_file:
+      - .env
 
   networks:
-      inception_net: {}
+      inception:
+        driver: bridge
+
+  volumes:
+    volume-mariadb:
+    driver: local
+    driveropts:
+      type: 'none'
+      o: 'bind'
+      device: /home/yst-laur/data/database
+
+    volume-wordpress:
+      driver: local
+      driveropts:
+        type: 'none'
+        o: 'bind'
+        device: /home/yst-laur/data/wordpress
