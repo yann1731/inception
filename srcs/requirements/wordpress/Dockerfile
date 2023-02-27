@@ -1,13 +1,8 @@
 FROM alpine:3.16
 
-RUN apk --no-cache add \
-    php7-fpm \
-    php7-mysqli \
-    php7-curl \
-    php7-gd \
-    php7-xml \
-    php7-mbstring \
-    mariadb \
+RUN apk update && apk upgrade && apk --no-cache add php-fpm \
+#    php7-fpm \
+#    php7-opcache \
     mariadb-client \
     wget \
     unzip

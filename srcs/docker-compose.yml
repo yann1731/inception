@@ -20,7 +20,7 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     volumes:
-      - volume-wordpress:/usr/share/nginx/html
+      - volume-wordpress:/var/www/html
     ports:
       - 443:443
     restart: always
@@ -33,7 +33,7 @@ services:
     build: ./requirements/wordpress
     container_name: wordpress
     volumes:
-      - volume-wordpress:/usr/share/nginx/html
+      - volume-wordpress:/var/www/html
     ports:
       - 9000:9000
     restart: always
