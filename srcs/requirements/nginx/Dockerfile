@@ -5,7 +5,9 @@ RUN apk update && apk add nginx \
 
 COPY config/nginx.conf /etc/nginx/nginx.conf
 
-COPY config/entrypoint.sh /entrypoint.sh
+COPY config/entrypoint.sh ./entrypoint.sh
+
+RUN chmod +x ./entrypoint.sh
 
 EXPOSE 443
 
