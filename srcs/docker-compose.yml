@@ -1,9 +1,13 @@
 version: "3.3"
 
+volumes:
+  volume-mariadb:
+  volume-wordpress:
+
 services:
   mariadb:
-    build: ./requirements/mariadb/
     container_name: mariadb
+    build: ./requirements/mariadb/
     volumes:
       - volume-mariadb:/var/lib/mysql
     environment:
@@ -17,8 +21,8 @@ services:
       - .env
 
   nginx:
-    build: ./requirements/nginx
     container_name: nginx
+    build: ./requirements/nginx
     volumes:
       - volume-wordpress:/var/www/html
     ports:
@@ -30,8 +34,8 @@ services:
       - .env
 
   wordpress:
-    build: ./requirements/wordpress
     container_name: wordpress
+    build: ./requirements/wordpress
     volumes:
       - volume-wordpress:/var/www/html
     ports:
@@ -41,10 +45,9 @@ services:
       - inception
     env_file:
       - .env
+    depends_on:
+      - mariadb
 
-volumes:
-  volume-mariadb:
-  volume-wordpress:
 
 networks:
   inception:
