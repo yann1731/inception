@@ -44,16 +44,7 @@ services:
 
 volumes:
   volume-mariadb:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/yst-laur/data/database
-
   volume-wordpress:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/yst-laur/data/wordpress
 
 networks:
   inception:
