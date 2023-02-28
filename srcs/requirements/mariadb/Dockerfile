@@ -7,4 +7,8 @@ RUN apk add mariadb \
 
 COPY config/50-server.cnf /etc/mysql/my.cnf
 
-CMD ["mysqld"]
+COPY config/entrypoint.sh ./entrypoint.sh
+
+RUN chmod +x ./entrypoint.sh
+
+CMD ["/entrypoint.sh"]
