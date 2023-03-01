@@ -8,4 +8,6 @@ rm wordpress.tar.gz
 cp -r wordpress/ /var/www/html
 rm -rf wordpress/
 
+
+
 # exec "$@"
