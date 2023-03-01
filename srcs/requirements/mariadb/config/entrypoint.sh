@@ -1,8 +1,6 @@
 #!bin/sh
 
 # execute any pre-init scripts
-mkdir /var/log/mysql/
-chmod +w /var/log/mysql/
 
 for i in /scripts/pre-init.d/*sh
 do
@@ -89,5 +87,7 @@ do
 		. ${i}
 	fi
 done
+
+# /etc/init.d/mysql start
 
 exec /usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0 $@

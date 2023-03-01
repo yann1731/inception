@@ -5,48 +5,43 @@ volumes:
   volume-wordpress:
 
 services:
-#   mariadb:
-#     container_name: mariadb
-#     build: ./requirements/mariadb/
-#     volumes:
-#       - volume-mariadb:/var/lib/mysql
-#     ports:
-#       - 3306:3306
-#     restart: always
-#     networks:
-#       - inception
-#     env_file:
-#       - .env
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb/
+    volumes:
+      - volume-mariadb:/var/lib/mysql
+    networks:
+      - inception
+    env_file:
+      - .env
+    restart: always
 
-#   nginx:
-#     container_name: nginx
-#     build: ./requirements/nginx
-#     volumes:
-#       - volume-wordpress:/var/www/html
-#     ports:
-#       - 443:443
-#     restart: always
-#     networks:
-#       - inception
-#     env_file:
-#       - .env
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    volumes:
+      - volume-wordpress:/var/www/html
+    ports:
+      - 443:443
+    networks:
+      - inception
+    env_file:
+      - .env
+    restart: always
 
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress
     volumes:
       - volume-wordpress:/var/www/html
-    ports:
-      - 9000:9000
-    restart: always
+    depends_on:
+      - mariadb
     networks:
       - inception
     env_file:
       - .env
-    # depends_on:
-    #   - mariadb
+    restart: always
 
 
 networks:
   inception:
-    driver: bridge
