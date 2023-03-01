@@ -11,14 +11,11 @@ RUN apk add php7 \
     wget \
     unzip
 
-COPY conf/config.sh /config.sh
-
-RUN wget https://wordpress.org/latest.tar.gz -O /tmp/wordpress.tar.gz && \
-    tar -xzf /tmp/wordpress.tar.gz \
-    rm /tmp/wordpress.tar.gz
-
 COPY conf/php.ini /etc/php7/conf.d/zzz_custom.ini
+COPY conf/entrypoint.sh ./entrypoint.sh
+
+RUN chmod +x ./entrypoint.sh
 
 EXPOSE 9000
 
-CMD ["config.sh"]
+CMD ["./entrypoint.sh"]
