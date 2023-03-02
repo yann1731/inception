@@ -33,6 +33,10 @@ RUN apk add php7 \
     bash \
     unzip
 
+RUN delgroup www-data && \
+    addgroup --system --gid 1000 www-data && \
+    adduser -S --uid 1000 www-data
+
 RUN rm /etc/php7/php-fpm.d/www.conf
 
 COPY conf/www.conf /etc/php7/php-fpm.d/www.conf

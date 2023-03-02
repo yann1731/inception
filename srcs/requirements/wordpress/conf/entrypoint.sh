@@ -1,23 +1,22 @@
 #!bin/sh
 
-adduser -D yst-laur
-chmod 777 -R /var/www/html
-chown -R yst-laur /var/www/html
-
 echo running wp core download...
-wp core download --force --allow-root --path=/var/www/wordpress
+wp core download --force --allow-root --path=/var/www/
 echo wp core download done...
 
 echo running wp core config...
-wp core config --allow-root --path=/var/www/wordpress/ --dbname=$WORDPRESS_DB_NAME --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --dbhost=$WORDPRESS_DB_HOST
+wp core config --allow-root --path=/var/www/ --dbname=$WORDPRESS_DB_NAME --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --dbhost=$WORDPRESS_DB_HOST
 echo wp core config done...
 
 echo wp core install running...
-wp core install --allow-root --path=/var/www/wordpress/ --url=localhost --title="Inception" --admin_user=$WORDPRESS_SUPER_USER --admin_password=$WORDPRESS_SUPER_USER_PASS --admin_email=admin@example.com
+wp core install --allow-root --path=/var/www/ --url=localhost --title="Inception" --admin_user=$WORDPRESS_SUPER_USER --admin_password=$WORDPRESS_SUPER_USER_PASS --admin_email=admin@example.com
 echo wp core install done...
 
 echo creating user...
-wp 	user create --allow-root bozo bozo@bozotheclown.com --role=author --user_pass=bozo123 --path="/var/www/wordpress"
+wp 	user create --allow-root bozo bozo@bozotheclown.com --role=author --user_pass=bozo123 --path="/var/www/"
 echo user created...
+
+echo changing directory ownership...
+chown -R www-data:www-data /var/www/
 
 $@
