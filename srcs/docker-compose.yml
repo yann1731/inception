@@ -16,8 +16,6 @@ services:
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress
-    www-data:
-      - 1000:1000
     volumes:
       - volume-wordpress:/var/www/
     depends_on:
@@ -31,8 +29,6 @@ services:
   nginx:
     container_name: nginx
     build: ./requirements/nginx
-    www-data:
-      - 1000:1000
     volumes:
       - volume-wordpress:/var/www/
     depends_on:
