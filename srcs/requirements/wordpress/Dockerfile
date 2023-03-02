@@ -34,6 +34,7 @@ RUN apk add php7 \
     unzip
 
 RUN rm /etc/php7/php-fpm.d/www.conf
+
 COPY conf/www.conf /etc/php7/php-fpm.d/www.conf
 COPY conf/php.ini /etc/php7/conf.d/zzz_custom.ini
 COPY conf/entrypoint.sh ./entrypoint.sh
