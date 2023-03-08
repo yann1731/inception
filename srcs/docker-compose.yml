@@ -4,7 +4,7 @@ version: "3.3"
 services:
   mariadb:
     container_name: mariadb
-    build: ./requirements/mariadb/
+    build: ./requirements/mariadb
     volumes:
       - volume-mariadb:/var/lib/mysql
     networks:
