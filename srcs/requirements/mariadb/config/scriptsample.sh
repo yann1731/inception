@@ -1,7 +1,14 @@
-#!bin/sh
+for i in /scripts/pre-init.d/*sh
+do
+	if [ -e "${i}" ]; then
+		echo "[i] pre-init.d - processing $i"
+		. "${i}"
+	fi
+done
 
-if [-f db_exists] then
-	echo "Database already configured..."
+if [ -d "/run/mysqld" ]; then
+	echo "[i] mysqld already present, skipping creation"
+	chown -R mysql:mysql /run/mysqld
 else
 	echo "[i] mysqld not found, creating...."
 	mkdir -p /run/mysqld
