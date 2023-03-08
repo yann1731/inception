@@ -1,9 +1,8 @@
-FROM alpine:3.15
+FROM debian:buster
 
-RUN apk update && apk upgrade
+RUN apt update && apt upgrade
 
-RUN apk add --no-cache mariadb mariadb-client mariadb-server-utils && \
-    rm -f /var/cache/apk/*
+RUN apt -y install mariadb-server
 
 COPY config/50-server.cnf /etc/mysql/my.cnf
 
