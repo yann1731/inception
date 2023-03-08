@@ -1,5 +1,9 @@
 #!bin/sh
 
+mysql_install_db --user=mysql --basedir=/usr/ --datadir=/var/lib/mysql
+
+exec mysqld --init-file=initfile.sql
+
 if [-f db_exists] then
 	echo "Database already configured..."
 else
