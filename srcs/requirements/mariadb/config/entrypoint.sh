@@ -21,4 +21,6 @@ else
 	mysqld --bootstrap < config
 fi
 
-exec $@
+echo "Starting mysqld..."
+
+exec mysqld
