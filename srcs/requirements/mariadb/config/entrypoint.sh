@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 if [ -d "/var/run/mysqld/" ];
 then
 	echo "mysqld already present, skipping creation"
@@ -8,6 +10,9 @@ else
 
 	mkdir -p /var/run/mysqld
 	chown -R mysql:mysql /var/run/mysqld
+	adduser $MYSQL_USER
+	usermod -aG mysql $MYSQL_USER
+	mysql_install_db --user=$MYSQL_USER --basedir=/usr/ --datadir=/var/lib/mysql/
 	echo "USE mysql;" >> config
 	echo "FLUSH PRIVILEGES;" >> config
 	echo "DELETE FROM mysql.db WHERE User='' AND Host='%'\;" >> config
@@ -18,5 +23,5 @@ else
 	echo "GRANT ALL ON `$MYSQL_DATABASE`.* to '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" >> config
 	echo "Fuck docker but here it is configuring mysqld using the bootstrap option"
 	mysqld --bootstrap < config
-	echo "That motherfucker is done apparently"
 fi
+mysqld --user=$MYSQL_USER
