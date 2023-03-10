@@ -11,5 +11,4 @@ RUN chmod +x /entrypoint.sh
 
 EXPOSE 3306
 
-ENTRYPOINT ["sh", "/entrypoint.sh"]
-CMD ["mysqld"]
+ENTRYPOINT ["/entrypoint.sh"]
