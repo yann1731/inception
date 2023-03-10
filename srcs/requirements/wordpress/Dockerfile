@@ -39,9 +39,9 @@ RUN delgroup www-data && \
 
 RUN rm /etc/php7/php-fpm.d/www.conf
 
-COPY conf/www.conf /etc/php7/php-fpm.d/www.conf
-COPY conf/php.ini /etc/php7/conf.d/zzz_custom.ini
-COPY conf/entrypoint.sh ./entrypoint.sh
+COPY config/www.conf /etc/php7/php-fpm.d/www.conf
+COPY config/php.ini /etc/php7/conf.d/zzz_custom.ini
+COPY config/entrypoint.sh ./entrypoint.sh
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
