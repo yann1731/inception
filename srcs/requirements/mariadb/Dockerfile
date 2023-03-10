@@ -5,11 +5,11 @@ RUN apt update && apt upgrade
 RUN apt -y install mariadb-server
 
 COPY config/50-server.cnf /etc/mysql/my.cnf
-COPY config/entrypoint.sh ./entrypoint.sh
+COPY config/entrypoint.sh /entrypoint.sh
 
-RUN chmod +x ./entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 EXPOSE 3306
 
-# ENTRYPOINT ["sh", "./entrypoint.sh"]
-CMD ["sh", "entrypoint.sh"]
+ENTRYPOINT ["sh", "/entrypoint.sh"]
+CMD ["mysqld"]
