@@ -2,10 +2,8 @@
 
 set -e
 
-while ! ping -c 1 -n mariadb &> /dev/null
-do
-	sleep 1;
-done
+sleep 10;
+
 if test -f "/var/www/wp-config.php";
 then
 	echo Skipping creation...
