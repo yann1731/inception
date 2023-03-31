@@ -1,7 +1,7 @@
 
 setup:
 	sudo mkdir -p /home/yst-laur/data/wordpress && sudo mkdir -p /home/yst-laur/data/mariadb
-	cd srcs && docker compose up
+	cd srcs && docker compose up -d
 
 start:
 	cd srcs && docker compose up -d
